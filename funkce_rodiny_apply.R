@@ -113,23 +113,15 @@ my_list <- lapply(
     
 lapply(my_list, "[[", 3)
 
-
 lapply(my_list, "[[", 14)
      ## vybírám jen 14-tý prvek z každého vektoru
      ## listu "my_list"
 
+	 
 lapply(
     my_list,
     sum
 )    ## součty vektorů listu "my_list"
-
-
-x <- my_list[[1]]
-1:length(x) %%
-    
-    
-assign("y", 50)
-     ## y <- 50 anebo y = 50
 
 
 set.seed(1)

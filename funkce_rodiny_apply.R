@@ -112,7 +112,6 @@ my_list <- lapply(
 
     
 lapply(my_list, "[[", 3)
-
 lapply(my_list, "[[", 14)
      ## vybírám jen 14-tý prvek z každého vektoru
      ## listu "my_list"

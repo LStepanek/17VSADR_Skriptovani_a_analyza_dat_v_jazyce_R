@@ -76,6 +76,32 @@ setColWidths(
 )
 
 
+## vytvářím dva své styly - jednak tučné písmo, jednak písmo zarovnané
+## doprava v rámci buňky ------------------------------------------------------
+
+my_bold_style <- createStyle(textDecoration = "bold")
+right_halign_cells <- createStyle(halign = "right")
+
+addStyle(
+    wb = my_workbook,
+    sheet = "můj první list",
+    style = my_bold_style,
+    rows = c(1:(dim(my_table)[1] + 1), rep(1, (dim(my_table)[2]))),
+    cols = c(rep(1, dim(my_table)[1] + 1), 1:(dim(my_table)[2])),
+    stack = TRUE
+)
+
+addStyle(
+    wb = my_workbook,
+    sheet = "můj první list",
+    style = right_halign_cells,
+    rows = 1:(dim(my_table)[1]),
+    cols = 2:(dim(my_table)[2] + 1),
+    gridExpand = TRUE,
+    stack = TRUE
+)
+
+
 ## ukládám workbook -----------------------------------------------------------
 
 saveWorkbook(

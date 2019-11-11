@@ -1,0 +1,140 @@
+---
+title: |
+ | 1. domácí úkol
+subtitle: |
+ | 17VSADR –- Skriptování a analýza dat v jazyce \textsf{R}
+date: "23\\. října 2017"
+fontsize: 12pt
+geometry: margin = 1in
+bibliography: references.bib
+csl: iso690-numeric-brackets-cs.csl
+output:
+  pdf_document:
+    number_sections: true
+    fig_caption: true
+    includes:
+      in_header: my_styles.tex
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\tableofcontents
+
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \hspace{\paperwidth}%
+    \raisebox{\baselineskip}{%
+      \makebox[0pt][r]{{\footnotesize\normalfont Vysázeno \TeX em, \textsf{R}-kem a Lubomírem Štěpánkem\quad}}
+}}}
+
+
+\section{Instrukce}
+
+První domácí úkol je zaměřen na procvičení základní syntaxe jazyka \textsf{R} a práce s vektory. Smyslem je řešit předložené úlohy pomocí vektorizace, nikoliv pomocí cyklů.
+
+Bližší poučení lze nalézt v \href{https://github.com/LStepanek/17VSADR_Skriptovani_a_analyza_dat_v_jazyce_R}{\framebox{prezentaci z prvního týdne}}, dále na \href{https://stackoverflow.com/}{\framebox{stack overflow}} nebo v publikacích [@zvara2013] či [@wickham2015]. Řešení úloh formou skriptu či dokumentu vysázeného pomocí \TeX u prosím \textbf{odevzdejte do 23:59 dne 28. 10. 2017} cestou emailu \href{mailto:lubomir.stepanek@fbmi.cvut.cz}{\framebox{lubomir.stepanek@fbmi.cvut.cz}}. Do předmětu emailu je vhodné uvést ident "17VSADR" (bez uvozovek).
+
+
+\section{Zadání úloh}
+
+\begin{enumerate}\bfseries
+
+\item úloha \hfill (0 bodů)
+
+{
+  \normalfont Určete pomocí \textsf{R} součet všech přirozených čísel menších než $1000$ takových, že jsou celočíselně dělitelné čísly $3$ nebo $5$.
+  
+  \textit{Řešení.} V \textsf{R} postupně zkoušejme
+  
+  \begin{lstlisting}[style = custom_R]
+    x <- 1:999      # vektor všech přirozených čísel < 1000
+    x %% 3 == 0     # která přirozená čísla < 1000 dělitelná 3
+    x %% 5 == 0     # která přirozená čísla < 1000 dělitelná 5
+    x %% 3 == 0 | x %% 5 == 0
+                    # která přirozená čísla < 1000 dělitelná 3 nebo 5
+    x[x %% 3 == 0 | x %% 5 == 0]
+                    # logicky indexuji hodnoty těch přirozených
+                    # čísel < 1000, které jsou dělitelné 3
+                    # nebo 5
+    sum(x[x %% 3 == 0 | x %% 5 == 0])
+                    # vracím součet hodnot těch přirozených
+                    # čísel < 1000, které jsou dělitelné 3 nebo 5
+    
+    # řešení na jeden řádek
+    x <- 1:999; sum(x[x %% 3 == 0 | x %% 5 == 0])
+                    # 233168
+  \end{lstlisting}
+  
+  Zjistili jsme, že součet všech přirozených čísel menších než $1000$ takových\footnote{Tímto jsme pomocí \textsf{R} vyřešili první úlohu z online série \href{https://projecteuler.net/}{\framebox{Project Euler}}.}, že jsou celočíselně dělitelné čísly $3$ nebo $5$, je roven $233168$.
+  
+}
+
+\bigskip
+
+\item úloha \hfill (2 body)
+
+{
+  \normalfont Najděte pomocí \textsf{R} všechny kladné celočíselné dělitele čísla $727854898680$.
+  
+}
+
+\bigskip
+
+\item úloha \hfill (2 body)
+
+{
+  \normalfont Rozhodněte pomocí \textsf{R}, zda je číslo $4732363477$ prvočíslem.
+  
+}
+
+\bigskip
+
+\item úloha \hfill (2 body)
+
+{
+  \normalfont Je dána množina čísel $M = \{3, 5, 7, 8, 13, 17, 31\}$. Najděte pomocí \textsf{R} všechna čísla nepřevyšující $1 000 000$ taková, že nejsou dělitelná ani jedním z čísel množiny $M$.
+  
+}
+
+\bigskip
+
+\item úloha \hfill (2 body)
+
+{
+  \normalfont Najděte pomocí \textsf{R} největší společný dělitel a nejmenší společný násobek\footnote{Při výpočtu nejmenšího společného násobku možná oceníte příkaz \texttt{options(digits = 22)}, který nastaví vypisování celých čísel až s přesností na $22$ platných cifer, čímž lze odvrátit ztrátu informace o posledních cifrách celého čísla, které by jinak byly nahrazeny nulami.} čísel $22375$, $63366$ \mbox{a $119214$}.
+  
+}
+
+
+\bigskip
+
+\item úloha \hfill (2 body)
+
+{
+  \normalfont Najděte pomocí \textsf{R} počet všech přirozených čísel $n$ nepřevyšujících $1000$ takových, že číslo $\floor{\sqrt[3]{n}}$ je dělitelem čísla $n$.
+
+}
+
+\bigskip
+
+\item úloha \hfill (2 body)
+
+{
+  \normalfont Určete pomocí \textsf{R} počet všech navzájem různých obdélníků\footnote{Obdélníky, které lze ztotožnit pouhým otočením, nepovažujeme za různé.} s obvodem rovným $100$ takových, že mají všechny strany celočíselné a že jejich obsah je větší než $1000$, ale menší než $2000$.
+  
+}
+
+
+\end{enumerate}
+
+
+\section{Reference}
+
+\printbibliography
+
+
+
+
+

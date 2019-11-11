@@ -1,0 +1,174 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% loaduju některé balíčky -----------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{tocloft}
+\usepackage{enumerate}
+\usepackage{eso-pic}
+\usepackage[czech]{babel}
+\usepackage{csquotes}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{bm}
+\usepackage[bottom]{footmisc}
+\usepackage{epstopdf}
+\usepackage{listings}
+\usepackage{titleps}
+\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning}
+\tikzset{
+    % definuji standardní špičku šipky
+    >=stealth',
+    % definuji styl pro boxíky
+    punkt/.style = {
+           rectangle,
+           rounded corners,
+           draw = black, very thick,
+           text width = 6.5em,
+           minimum height = 2em,
+           text centered},
+    % definuji styl šipky
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+
+% nastavuji header ------------------------------------------------------------
+\newpagestyle{my_page}{%
+  \headrule
+  \sethead{\Title}{}{\sectiontitle}
+  \setfoot{}{\thepage}{}
+}
+%\settitlemarks{title,section}
+\pagestyle{my_page}
+
+% nastavuji složku s grafikou -------------------------------------------------
+\graphicspath{{./vystupy/}}
+
+% bibliography management -----------------------------------------------------
+\usepackage[
+  backend = biber,
+  style = numeric,
+  citestyle = ieee
+]{biblatex}
+\addbibresource{references.bib}    %% loaduji reference
+\nocite{*}
+
+% české uvozovky --------------------------------------------------------------
+\DeclareQuoteAlias{german}{czech}
+\MakeOuterQuote{"}
+
+% přejmenovávám popisek obsahu na "Obsah" -------------------------------------
+\renewcommand{\contentsname}{Obsah}
+
+% přejmenovávám popisky obrázků na "Obr." -------------------------------------
+\renewcommand{\figurename}{Obr.}
+
+% přejmenovávám popisky tabulek na "Tab." -------------------------------------
+\renewcommand\tablename{Tab.}
+
+% upravuji formát obsahu ------------------------------------------------------
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% definuji prostředí nečíslovaného lemmatu ------------------------------------
+\newtheorem*{lemma*}{Lemma}
+
+% definuji prostředí nečíslované definice -------------------------------------
+\newtheorem*{mydef*}{Definice}
+\newtheoremstyle{named}{}{}{\itshape}{}{\bfseries}{.}{.5em}{\thmnote{#3's }#1}
+\theoremstyle{named}
+\newtheorem*{namedmydef}{Definice}
+
+% definuji dolní a horní celou část -------------------------------------------
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% definuji arg max ------------------------------------------------------------
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% předefinovávám číslování kvůli chunkům a odkazům v enumeraci ----------------
+\newcommand{\benum}{\begin{enumerate}[(i)]}
+\newcommand{\eenum}{\end{enumerate}}
+
+% definuji vlastní highlighting pro R-kové chunky kódu ------------------------
+%\captionsetup[lstlisting]{position = bottom}
+\definecolor{my_gray}{rgb}{0.4,0.4,0.4}
+\definecolor{very_light_gray}{gray}{0.95}
+\renewcommand{\lstlistingname}{kód}    %% preferenční slovo "kód" v popisku
+\lstdefinestyle{custom_R}{
+  backgroundcolor = \color{very_light_gray},
+  basicstyle = \ttfamily\small,
+  belowcaptionskip = 1\baselineskip,
+  breaklines = true,
+  frame = L,
+  xleftmargin = \parindent,
+  language = R,
+  showstringspaces = false,
+  keywordstyle = \bfseries\color{green!40!black},
+  commentstyle = \itshape\color{purple!40!black},
+  identifierstyle = \color{blue},
+  stringstyle = \color{orange},
+  numbers = none,                      %% anebo 'left' bez uvozovek
+  numbersep = 12pt,
+  numberstyle = \small\color{my_gray},
+  texcl = true,
+  alsoother = {\#},
+  inputencoding = utf8,
+  extendedchars = true,
+  literate = %
+  {á}{{\'a}}1
+  {č}{{\v{c}}}1
+  {ď}{{\v{d}}}1
+  {é}{{\'e}}1
+  {ě}{{\v{e}}}1
+  {í}{{\'i}}1
+  {ň}{{\v{n}}}1
+  {ó}{{\'o}}1
+  {ř}{{\v{r}}}1
+  {š}{{\v{s}}}1
+  {ť}{{\v{t}}}1
+  {ú}{{\'u}}1
+  {ů}{{\r{u}}}1
+  {ý}{{\'y}}1
+  {ž}{{\v{z}}}1
+  {Á}{{\'A}}1
+  {Č}{{\v{C}}}1
+  {Ď}{{\v{D}}}1
+  {É}{{\'E}}1
+  {Ě}{{\v{E}}}1
+  {Í}{{\'I}}1
+  {Ň}{{\v{N}}}1
+  {Ó}{{\'O}}1
+  {Ř}{{\v{R}}}1
+  {Š}{{\v{S}}}1
+  {Ť}{{\v{T}}}1
+  {Ú}{{\'U}}1
+  {Ů}{{\r{U}}}1
+  {Ý}{{\'Y}}1
+  {Ž}{{\v{Z}}}1
+}
+\lstset{escapechar = @, style = custom_R}
+
+% definuji příkaz pro dokumentový nadpis --------------------------------------
+\makeatletter
+  \let\Title\@title
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
